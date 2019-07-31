@@ -24,9 +24,9 @@
         <nav class="bg-white">
             <div class="container mx-auto items-center py-4">
                 <div class="flex justify-between align-items">
-                    <a class="navbar-brand align-items" href="{{ url('/') }}">
-                    <img src="/images/teamworkIcon.png" alt="TeamWork">
-                        {{ config('app.name', 'Laravel') }}
+                    <a class="navbar-brand align-items" href="{{ url('/projects') }}">
+                    <img src="/images/teamWork.png" alt="TeamWork" style="height: 70px;">
+                        <!-- {{ config('app.name', 'TeamWork') }} -->
                     </a>
                     <!-- <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
                         <span class="navbar-toggler-icon"></span>
@@ -41,7 +41,7 @@
                             @guest
                                 <li class="nav-item">
                                     <a class="nav-link" href="{{ route('login') }}">
-                                    <img src="/images/teamwork.png" alt="Teamwork">
+                                    {{-- <img src="/images/teamwork.png" alt="Teamwork"> --}}
                                         {{ __('Login') }}
                                     </a>
                                 </li>
@@ -75,7 +75,7 @@
             </div>
         </nav>
 
-        <main class="container mx-auto py-4">
+        <main class="container mx-auto py-4 sm:w-full">
             @yield('content')
         </main>
     </div>

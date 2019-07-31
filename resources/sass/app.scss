@@ -10,7 +10,40 @@
 
 @tailwind utilities;
 
-.button {
-    @apply .bg-blue .text-white .no-underline .rounded-lg .text-sm .py-2 .px-5;
-    box-shadow: 0 2px 7px 0 #b0eaff;
+
+/**
+    add { "scss.validate": false } in workspace settings to turn off errors when using tailwind with scss
+*/
+
+.section {
+    @apply .px-4;
 }
+
+.button {
+    @apply .text-white .no-underline .rounded-lg .text-sm .py-2 .px-5;
+    box-shadow: 0 2px 7px 0 #b0eaff;
+    // .bg-blue
+}
+
+.card {
+    @apply .bg-white .p-5 .rounded-lg .shadow;
+}
+
+body {
+    height: 98vh;
+}
+
+button:hover {
+    cursor:pointer;
+}
+
+input[type=checkbox]:hover {
+    cursor:pointer;
+}
+
+.textwrapper {
+    width: 100%;
+    margin:5px 0;
+  padding:3px;
+}
+

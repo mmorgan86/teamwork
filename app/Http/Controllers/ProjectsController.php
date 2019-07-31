@@ -6,6 +6,12 @@ use App\Project;
 
 class ProjectsController extends Controller
 {
+
+    /**
+     * View all projects
+     * 
+     * @return \Illuminate\Http\Response
+     */
     public function index()
     {
         // $projects = Project::all();
@@ -14,11 +20,19 @@ class ProjectsController extends Controller
         return view('projects.index', compact('projects'));
     }
 
+    /**
+     * Show a single project
+     * 
+     * @param \App\Project $project
+     * 
+     * 
+     * @return \Illuminate\Http\Response
+     * @throws \Illuminate\Auth\Access\AuthorizationException
+     */
+
     public function show(Project $project)
     {
-        if(auth()->user()->isNot($project->owner)) {
-            abort(403);
-        }
+        $this->authorize('update', $project);
 
         return view('projects.show', compact('project'));
 
@@ -27,19 +41,42 @@ class ProjectsController extends Controller
     public function store()
     {
         // validate date
-        $attributes = request()->validate([
-            'title' => 'required',
-            'description' => 'required'
-        ]);
+        $attributes = $this->validateRequest();
 
-        auth()->user()->projects()->create($attributes);
+        $project = auth()->user()->projects()->create($attributes);
 
         // redirect
-        return redirect('/projects');
+        return redirect($project->path());
+    }
+
+    public function edit(Project $project)
+    {
+        return view('projects.edit', compact('project'));
     }
 
     public function create()
     {
         return view('projects.create');
+    }
+
+    public function update(Project $project)
+    {
+        $this->authorize('update', $project);
+
+        $attributes = $this->validateRequest();
+      
+        $project->update($attributes);
+
+        // redirect
+        return redirect($project->path());
+    }
+
+    protected function validateRequest()
+    {
+        return request()->validate([
+            'title' => 'required',
+            'description' => 'required',
+            'notes' => 'min:3'
+        ]);
     }
 }

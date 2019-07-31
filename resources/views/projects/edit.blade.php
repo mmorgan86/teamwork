@@ -9,17 +9,17 @@
             <div class="card" style="padding: 4rem;">
 
                 <h1 class="font-normal mb-6 text-center text-3xl">
-                    Let's begin something new
+                    Edit Project
                 </h1>
 
                 <form 
-                    action="/projects" 
+                    action="{{ $project->path() }}" 
                     method="POST">
                 
-                    @include('projects._form', [
-                        'project' => new App\Project,
-                        'buttonText' => 'Create Project'
-                        ])
+                    @include('projects._form',[
+                        'buttonText' => 'Update Project'
+                    ])
+                    @method('PATCH')
 
                 </form>
         </div>

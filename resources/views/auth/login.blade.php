@@ -1,21 +1,25 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container">
-    <div class="row justify-content-center">
-        <div class="w-1/2">
-            <div class="card">
-                <div class="card-header">{{ __('Login') }}</div>
+<div class="bg-grey-lighter font-sans">
+    <div class="container mx-auto flex justify-center">
+        <div class="lg:w-1/3 sm:w-screen">
+            <div>
+                <div class="font-hairline mb-6 text-center text-3xl">{{ __('Login') }}</div>
 
-                <div class="card-body">
+                <div class="p-8 bg-white mb-6 rounded-lg shadow-lg" style="border-top: 1rem solid #2eaef1;">
                     <form method="POST" action="{{ route('login') }}">
                         @csrf
-
-                        <div class="form-group row">
-                            <label for="email" class="col-md-4 col-form-label text-md-right">{{ __('E-Mail Address') }}</label>
+                        <div class="form-group row mb-6">
+                            <label for="email" class="font-bold text-grey-darker block mb-2 text-lg">{{ __('E-Mail Address') }}</label>
 
                             <div class="col-md-6">
-                                <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus>
+                                <input id="email" 
+                                    type="email" 
+                                    class="block appearance-none w-full bg-white border border-grey-light hover:border-grey px-2 py-2 rounded shadow text-lg @error('email') is-invalid @enderror" 
+                                    name="email" 
+                                    value="{{ old('email') }}" required autocomplete="email" autofocus
+                                    placeholder="Your Email">
 
                                 @error('email')
                                     <span class="invalid-feedback" role="alert">
@@ -25,11 +29,14 @@
                             </div>
                         </div>
 
-                        <div class="form-group row">
-                            <label for="password" class="col-md-4 col-form-label text-md-right">{{ __('Password') }}</label>
+                        <div class="form-group row mb-6">
+                            <label for="password" class="font-bold text-grey-darker block mb-2 text-xl">{{ __('Password') }}</label>
 
                             <div class="col-md-6">
-                                <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="current-password">
+                                <input id="password" 
+                                    type="password" class="block appearance-none w-full bg-white border border-grey-light hover:border-grey px-2 py-2 rounded shadow text-lg @error('password') is-invalid @enderror" 
+                                    name="password" required autocomplete="current-password"
+                                    placeholder="Your Password">
 
                                 @error('password')
                                     <span class="invalid-feedback" role="alert">
@@ -40,7 +47,7 @@
                         </div>
 
                         <div class="form-group row">
-                            <div class="col-md-6 offset-md-4">
+                            <div class="col-md-6 offset-md-4 mt-4">
                                 <div class="form-check">
                                     <input class="form-check-input" type="checkbox" name="remember" id="remember" {{ old('remember') ? 'checked' : '' }}>
 
@@ -51,9 +58,9 @@
                             </div>
                         </div>
 
-                        <div class="form-group row mb-0">
-                            <div class="col-md-8 offset-md-4">
-                                <button type="submit" class="btn btn-primary">
+                        <div class="mt-6">
+                            <div class="flex justify-between">
+                                <button type="submit" class="button bg-blue hover:bg-blue-light text-lg">
                                     {{ __('Login') }}
                                 </button>
 
@@ -66,6 +73,7 @@
                         </div>
                     </form>
                 </div>
+                <div class="text-center">Don't have an account? <a href="{{ route('register') }}">Create Account</a></div>
             </div>
         </div>
     </div>
