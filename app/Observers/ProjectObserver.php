@@ -27,5 +27,4 @@ class ProjectObserver
     {
         $project->recordActivity('updated');        
     }
-
 }

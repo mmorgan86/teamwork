@@ -59,11 +59,17 @@
                                 class="border-none card w-full mb-4" 
                                 style="min-height: 200px;"
                                 placeholder="Anything special that you want to make note of?"
-                                >{{ $project->notes }}
-                            </textarea>
+                                >{{ $project->notes }}</textarea>
                         </div>
                         <button type="submit" class="button bg-blue">Save</button>
                     </form>
+                    @if($errors->any())
+                        <div class="field mt-6">
+                            @foreach($errors->all() as $error)
+                                <li class="text-sm text-red">{{ $error }}</li>
+                            @endforeach
+                        </div>
+                    @endif
                 </div>
             </div>
 

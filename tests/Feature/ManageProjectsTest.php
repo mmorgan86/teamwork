@@ -76,15 +76,33 @@ class ProjectsTest extends TestCase
     /** test */
     public function test_a_user_can_update_a_project()
     {
+        $this->withoutExceptionHandling();
 
         $project = ProjectFactory::create();
 
         $this->actingAs($project->owner)
-            ->patch($project->path(), $attributes = ['title' => 'changed', 'description' => 'changed', 'notes' => 'changed'])
+            ->patch($project->path(), $attributes = [
+                'title' => 'changed', 
+                'description' => 'changed', 
+                'notes' => 'changed'
+            ])
             ->assertRedirect($project->path());
         
         $this->get($project->path().'/edit')->assertOk();
 
+        $this->assertDatabaseHas('projects', $attributes);
+    }
+
+    /** test */
+    public function test_a_user_can_update_a_general_notes()
+    {
+
+        $project = ProjectFactory::create();
+
+        $this->actingAs($project->owner)
+            ->patch($project->path(), $attributes = [
+            'notes' => 'changed']);
+        
         $this->assertDatabaseHas('projects', $attributes);
     }
 

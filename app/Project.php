@@ -6,6 +6,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class Project extends Model
 {
+    use RecordsActivity;
+
     protected $guarded = [];
 
     /**
@@ -53,16 +55,5 @@ class Project extends Model
     public function activity()
     {
         return $this->hasMany(Activity::class)->latest();
-    }
-
-    /**
-     * Record activity for project
-     * 
-     * @param string $description
-     */
-
-    public function recordActivity($description)
-    {
-        $this->activity()->create(compact('description')); 
     }
 }

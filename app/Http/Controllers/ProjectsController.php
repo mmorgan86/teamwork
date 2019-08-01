@@ -61,22 +61,22 @@ class ProjectsController extends Controller
 
     public function update(Project $project)
     {
+        
         $this->authorize('update', $project);
 
         $attributes = $this->validateRequest();
       
         $project->update($attributes);
 
-        // redirect
         return redirect($project->path());
     }
 
     protected function validateRequest()
     {
         return request()->validate([
-            'title' => 'required',
-            'description' => 'required',
-            'notes' => 'min:3'
-        ]);
+            'title' => 'sometimes|required',
+            'description' => 'sometimes|required',
+            'notes' => 'nullable'
+        ]);        
     }
 }
