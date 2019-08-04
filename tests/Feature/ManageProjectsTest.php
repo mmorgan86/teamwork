@@ -14,8 +14,9 @@ class ProjectsTest extends TestCase
 
 
     /** @test.  */
-    public function test_guest_cannot_manage_projects() 
+    public function test_guest_cannot_manage_projects()
     {
+
         $project = factory('App\Project')->create();
 
         $this->get('/projects')->assertRedirect('login');
@@ -30,15 +31,15 @@ class ProjectsTest extends TestCase
     }
 
     /** @test.  */
-    public function test_a_user_can_create_a_project() 
-    {        
+    public function test_a_user_can_create_a_project()
+    {
         $this->signin();
 
         $this->get('/projects/create')->assertStatus(200);
 
         $attributes = [
             'title' => $this->faker->sentence,
-            'description' => $this->faker->sentence, 
+            'description' => $this->faker->sentence,
             'notes' => 'General notes here.'
         ];
 
@@ -55,7 +56,7 @@ class ProjectsTest extends TestCase
 
     }
 
-    public function test_a_project_requires_a_title() 
+    public function test_a_project_requires_a_title()
     {
         $this->signin();
 
@@ -64,7 +65,7 @@ class ProjectsTest extends TestCase
        $this->post('/projects', $attributes)->assertSessionHasErrors('title');
     }
 
-    public function test_a_project_requires_a_description() 
+    public function test_a_project_requires_a_description()
     {
         $this->signin();
 
@@ -82,12 +83,12 @@ class ProjectsTest extends TestCase
 
         $this->actingAs($project->owner)
             ->patch($project->path(), $attributes = [
-                'title' => 'changed', 
-                'description' => 'changed', 
+                'title' => 'changed',
+                'description' => 'changed',
                 'notes' => 'changed'
             ])
             ->assertRedirect($project->path());
-        
+
         $this->get($project->path().'/edit')->assertOk();
 
         $this->assertDatabaseHas('projects', $attributes);
@@ -102,7 +103,7 @@ class ProjectsTest extends TestCase
         $this->actingAs($project->owner)
             ->patch($project->path(), $attributes = [
             'notes' => 'changed']);
-        
+
         $this->assertDatabaseHas('projects', $attributes);
     }
 
@@ -110,7 +111,7 @@ class ProjectsTest extends TestCase
     {
         $project = ProjectFactory::create();
 
-        $this->actingAs($project->owner)->get($project->path())                
+        $this->actingAs($project->owner)->get($project->path())
             ->assertSee(\Illuminate\Support\Str::limit($project->description, 100));
     }
 
@@ -131,5 +132,5 @@ class ProjectsTest extends TestCase
         $project = factory('App\Project')->create();
         $this->patch($project->path(), [])->assertStatus(403);
     }
-    
+
 }
