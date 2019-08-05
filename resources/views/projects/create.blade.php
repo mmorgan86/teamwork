@@ -1,29 +1,19 @@
-@extends('layouts.app')
+@extends ('layouts.app')
 
 @section('content')
+    <div class="lg:w-1/2 lg:mx-auto bg-card p-6 md:py-12 md:px-16 rounded shadow">
+        <h1 class="text-2xl font-normal mb-10 text-center">
+            Let's start something new
+        </h1>
 
-    <div class="bg-grey-lighter font-sans flex">
-
-        <div class="container mx-auto justify-center lg:w-3/5">
-            
-            <div class="card" style="padding: 4rem;">
-
-                <h1 class="font-normal mb-6 text-center text-3xl">
-                    Let's begin something new
-                </h1>
-
-                <form 
-                    action="/projects" 
-                    method="POST">
-                
-                    @include('projects._form', [
-                        'project' => new App\Project,
-                        'buttonText' => 'Create Project'
-                        ])
-
-                </form>
-        </div>
+        <form
+            method="POST"
+            action="/projects"
+        >
+            @include ('projects.form', [
+                'project' => new App\Project,
+                'buttonText' => 'Create Project'
+            ])
+        </form>
     </div>
-</div>
-
 @endsection

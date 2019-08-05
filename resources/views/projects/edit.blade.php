@@ -1,29 +1,20 @@
-@extends('layouts.app')
+@extends ('layouts.app')
 
 @section('content')
+    <div class="lg:w-1/2 lg:mx-auto bg-card p-6 md:py-12 md:px-16 rounded shadow">
+        <h1 class="text-2xl font-normal mb-10 text-center">
+            Edit Your Project
+        </h1>
 
-    <div class="bg-grey-lighter font-sans flex">
+        <form
+            method="POST"
+            action="{{ $project->path() }}"
+        >
+            @method('PATCH')
 
-        <div class="container mx-auto justify-center lg:w-3/5">
-            
-            <div class="card" style="padding: 4rem;">
-
-                <h1 class="font-normal mb-6 text-center text-3xl">
-                    Edit Project
-                </h1>
-
-                <form 
-                    action="{{ $project->path() }}" 
-                    method="POST">
-                
-                    @include('projects._form',[
-                        'buttonText' => 'Update Project'
-                    ])
-                    @method('PATCH')
-
-                </form>
-        </div>
+            @include ('projects.form', [
+                'buttonText' => 'Update Project'
+            ])
+        </form>
     </div>
-</div>
-
 @endsection

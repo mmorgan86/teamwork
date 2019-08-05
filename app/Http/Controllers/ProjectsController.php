@@ -9,23 +9,22 @@ class ProjectsController extends Controller
 
     /**
      * View all projects
-     * 
+     *
      * @return \Illuminate\Http\Response
      */
     public function index()
     {
-        // $projects = Project::all();
-        $projects = auth()->user()->projects;
+        $projects = auth()->user()->accessibleProjects();
 
         return view('projects.index', compact('projects'));
     }
 
     /**
      * Show a single project
-     * 
+     *
      * @param \App\Project $project
-     * 
-     * 
+     *
+     *
      * @return \Illuminate\Http\Response
      * @throws \Illuminate\Auth\Access\AuthorizationException
      */
@@ -40,10 +39,14 @@ class ProjectsController extends Controller
 
     public function store()
     {
-        // validate date
-        $attributes = $this->validateRequest();
+        $project = auth()->user()->projects()->create($this->validateRequest());
 
-        $project = auth()->user()->projects()->create($attributes);
+        if ($tasks = request('tasks')) {
+            $project->addTasks($tasks);
+        }
+        if (request()->wantsJson()) {
+            return ['message' => $project->path()];
+        }
 
         // redirect
         return redirect($project->path());
@@ -61,14 +64,26 @@ class ProjectsController extends Controller
 
     public function update(Project $project)
     {
-        
+
         $this->authorize('update', $project);
 
-        $attributes = $this->validateRequest();
-      
-        $project->update($attributes);
+        $project->update($this->validateRequest());
 
         return redirect($project->path());
+    }
+
+    /**
+     * Destroy the project.
+     *
+     * @param  Project $project
+     * @return \Illuminate\Http\RedirectResponse
+     * @throws \Illuminate\Auth\Access\AuthorizationException
+     */
+    public function destroy(Project $project)
+    {
+        $this->authorize('manage', $project);
+        $project->delete();
+        return redirect('/projects');
     }
 
     protected function validateRequest()
@@ -77,6 +92,6 @@ class ProjectsController extends Controller
             'title' => 'sometimes|required',
             'description' => 'sometimes|required',
             'notes' => 'nullable'
-        ]);        
+        ]);
     }
 }

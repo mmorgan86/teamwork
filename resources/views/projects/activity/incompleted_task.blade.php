@@ -1,1 +1,1 @@
-You incompleted <span class='text-red'>"{{ $activity->subject->body }}" </span>
+{{ $activity->user->name }} incompleted "{{ $activity->subject->body }}"

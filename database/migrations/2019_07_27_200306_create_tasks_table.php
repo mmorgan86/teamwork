@@ -14,14 +14,13 @@ class CreateTasksTable extends Migration
     public function up()
     {
         Schema::create('tasks', function (Blueprint $table) {
-            $table->bigIncrements('id');
-            $table->unsignedBigInteger('project_id');
+            $table->increments('id');
+            $table->unsignedInteger('project_id');
             $table->text('body');
             $table->boolean('completed')->default(false);
             $table->timestamps();
         });
     }
-
     /**
      * Reverse the migrations.
      *

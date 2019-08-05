@@ -34,7 +34,7 @@
 
                     <div>
                         <!-- Left Side Of Navbar -->
-                        
+
                         <!-- Right Side Of Navbar -->
                         <ul class="navbar-nav ml-auto">
                             <!-- Authentication Links -->
@@ -74,6 +74,8 @@
                 </div>
             </div>
         </nav>
+
+        <?php env('SESSION_DRIVER'); ?>
 
         <main class="container mx-auto py-4 sm:w-full">
             @yield('content')

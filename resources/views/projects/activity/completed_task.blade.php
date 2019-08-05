@@ -1,1 +1,1 @@
-You completed <span class='text-green-light'>"{{ $activity->subject->body }}" </span>
+{{ $activity->user->name }} completed "{{ $activity->subject->body }}"
