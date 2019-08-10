@@ -14,14 +14,15 @@
 
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
-    <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet"
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 </head>
-<body class="bg-grey-light">
+<body class="bg-page theme-light">
     <div id="app">
-        <nav class="bg-white">
+        <!-- left side of navbar -->
+        <nav class="bg-header section content-center">
             <div class="container mx-auto items-center py-4">
                 <div class="flex justify-between align-items">
                     <a class="navbar-brand align-items" href="{{ url('/projects') }}">
@@ -32,44 +33,55 @@
                         <span class="navbar-toggler-icon"></span>
                     </button> -->
 
-                    <div>
-                        <!-- Left Side Of Navbar -->
 
+                        <!-- /Left Side Of Navbar -->
+                    <div class="flex my-auto">
                         <!-- Right Side Of Navbar -->
-                        <ul class="navbar-nav ml-auto">
+                        <div class="flex text-muted no-underline">
                             <!-- Authentication Links -->
                             @guest
-                                <li class="nav-item">
-                                    <a class="nav-link" href="{{ route('login') }}">
-                                    {{-- <img src="/images/teamwork.png" alt="Teamwork"> --}}
-                                        {{ __('Login') }}
-                                    </a>
-                                </li>
+                                <a class="nav-link mr-2 text-accent no-underline" href="{{ route('login') }}">
+                                {{-- <img src="/images/teamwork.png" alt="Teamwork"> --}}
+                                    {{ __('Login') }}
+                                </a>
                                 @if (Route::has('register'))
-                                    <li class="nav-item">
-                                        <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
-                                    </li>
+                                    <a class="nav-link text-accent no-underline" href="{{ route('register') }}">{{ __
+                                    ('Register')
+                                    }}</a>
                                 @endif
                             @else
-                                <li class="nav-item dropdown">
-                                    <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                        {{ Auth::user()->name }} <span class="caret"></span>
-                                    </a>
 
-                                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                                        <a class="dropdown-item" href="{{ route('logout') }}"
-                                        onclick="event.preventDefault();
-                                                        document.getElementById('logout-form').submit();">
-                                            {{ __('Logout') }}
-                                        </a>
+                                <theme-switcher></theme-switcher>
 
-                                        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                                            @csrf
-                                        </form>
-                                    </div>
-                                </li>
+                                <button
+                                   class="flex items-center text-default no-underline text-sm"
+
+                                >
+                                    <img
+                                        src="{{ gravatar_url(Auth::user()->email) }}"
+                                         class="rounded-full h-16 mr-8"
+                                         alt="avatar"
+                                    >
+
+                                    {{ Auth::user()->name }}
+
+                                </button>
+
+                                <div class="dropdown-menu dropdown-menu-right"
+                                     aria-labelledby="navbarDropdown"
+                                >
+{{--                                    <a class="dropdown-item" href="{{ route('logout') }}"--}}
+{{--                                    onclick="event.preventDefault();--}}
+{{--                                                    document.getElementById('logout-form').submit();">--}}
+{{--                                        {{ __('Logout') }}--}}
+{{--                                    </a>--}}
+
+                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                        @csrf
+                                    </form>
+                                </div>
                             @endguest
-                        </ul>
+                        </div>
                     </div>
                 </div>
             </div>
