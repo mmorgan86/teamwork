@@ -1,5 +1,6 @@
 .button {
     @apply .bg-button .no-underline .rounded-lg .text-sm .py-2 .px-5;
+    box-shadow: 0 2px 7px 0 #b0eaff;
     color: white;
 
     &.is-outlined {
@@ -12,5 +13,9 @@
 
     .theme-dark & {
         box-shadow: 0 2px 7px 0 #00658b;
+    }
+
+    .theme-blue & {
+        color:black;
     }
 }

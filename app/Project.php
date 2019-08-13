@@ -18,7 +18,7 @@ class Project extends Model
      *
      * @return string
      */
-    public function path()
+    function path()
     {
         return "/projects/{$this->id}";
     }
@@ -27,7 +27,7 @@ class Project extends Model
      *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
-    public function owner()
+    function owner()
     {
         return $this->belongsTo(User::class);
     }
@@ -36,7 +36,7 @@ class Project extends Model
      *
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
-    public function tasks()
+    function tasks()
     {
         return $this->hasMany(Task::class);
     }
@@ -46,17 +46,18 @@ class Project extends Model
      * @param array $tasks
      * @return \Illuminate\Database\Eloquent\Collection
      */
-    public function addTasks($tasks)
+    function addTasks($tasks)
     {
         return $this->tasks()->createMany($tasks);
     }
+
     /**
      * Add a task to the project.
      *
      * @param  string $body
      * @return \Illuminate\Database\Eloquent\Model
      */
-    public function addTask($body)
+    function addTask($body)
     {
         return $this->tasks()->create(compact('body'));
     }
@@ -65,7 +66,7 @@ class Project extends Model
      *
      * @param \App\User $user
      */
-    public function invite(User $user)
+    function invite(User $user)
     {
         $this->members()->attach($user);
     }
@@ -74,8 +75,9 @@ class Project extends Model
      *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
      */
-    public function members()
+    function members()
     {
         return $this->belongsToMany(User::class, 'project_members')->withTimestamps();
     }
+
 }

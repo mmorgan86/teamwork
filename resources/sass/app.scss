@@ -1,32 +1,31 @@
+// fontawesome
+@import "~font-awesome/scss/font-awesome.scss";
+
 // Variables
 @import 'variables';
 
 // Bootstrap
 // @import '~bootstrap/scss/bootstrap';
 
-@tailwind base;
 
-@tailwind components;
+// themes
+@import 'themes/light';
+@import 'themes/dark';
+@import 'themes/blue';
+@import 'themes/girly';
 
-@tailwind utilities;
-
-
-/**
-    add { "scss.validate": false } in workspace settings to turn off errors when using tailwind with scss
-*/
+// components
+@import 'components/button';
+@import 'components/card';
+@import 'components/dropdown';
 
 .section {
     @apply .px-4;
 }
 
-.button {
-    @apply .text-white .no-underline .rounded-lg .text-sm .py-2 .px-5;
-    box-shadow: 0 2px 7px 0 #b0eaff;
-    // .bg-blue
-}
-
-.card {
-    @apply .bg-white .p-5 .rounded-lg .shadow;
+body,
+button {
+    @apply .text-default;
 }
 
 body {
@@ -47,3 +46,8 @@ input[type=checkbox]:hover {
   padding:3px;
 }
 
+@tailwind base;
+
+@tailwind components;
+
+@tailwind utilities;

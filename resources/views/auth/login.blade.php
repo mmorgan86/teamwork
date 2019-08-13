@@ -7,17 +7,17 @@
             <div>
                 <div class="font-hairline mb-6 text-center text-3xl">{{ __('Login') }}</div>
 
-                <div class="p-8 bg-white mb-6 rounded-lg shadow-lg" style="border-top: 1rem solid #2eaef1;">
+                <div class="p-8 bg-white mb-6 shadow-lg rounded-lg" style="border-top: 1rem solid #2eaef1;">
                     <form method="POST" action="{{ route('login') }}">
                         @csrf
                         <div class="form-group row mb-6">
                             <label for="email" class="font-bold text-grey-darker block mb-2 text-lg">{{ __('E-Mail Address') }}</label>
 
                             <div class="col-md-6">
-                                <input id="email" 
-                                    type="email" 
-                                    class="block appearance-none w-full bg-white border border-grey-light hover:border-grey px-2 py-2 rounded shadow text-lg @error('email') is-invalid @enderror" 
-                                    name="email" 
+                                <input id="email"
+                                    type="email"
+                                    class="block appearance-none w-full bg-white border border-grey-light hover:border-grey px-2 py-2 shadow text-lg @error('email') is-invalid @enderror"
+                                    name="email"
                                     value="{{ old('email') }}" required autocomplete="email" autofocus
                                     placeholder="Your Email">
 
@@ -33,8 +33,8 @@
                             <label for="password" class="font-bold text-grey-darker block mb-2 text-xl">{{ __('Password') }}</label>
 
                             <div class="col-md-6">
-                                <input id="password" 
-                                    type="password" class="block appearance-none w-full bg-white border border-grey-light hover:border-grey px-2 py-2 rounded shadow text-lg @error('password') is-invalid @enderror" 
+                                <input id="password"
+                                    type="password" class="block appearance-none w-full bg-white border border-grey-light hover:border-grey px-2 py-2 shadow text-lg @error('password') is-invalid @enderror"
                                     name="password" required autocomplete="current-password"
                                     placeholder="Your Password">
 

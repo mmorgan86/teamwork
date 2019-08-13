@@ -25,19 +25,17 @@
         <nav class="bg-header section content-center">
             <div class="container mx-auto items-center py-4">
                 <div class="flex justify-between align-items">
-                    <a class="navbar-brand align-items" href="{{ url('/projects') }}">
-                    <img src="/images/teamWork.png" alt="TeamWork" style="height: 70px;">
-                        <!-- {{ config('app.name', 'TeamWork') }} -->
-                    </a>
-                    <!-- <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
-                        <span class="navbar-toggler-icon"></span>
-                    </button> -->
+                    <h1>
+                        <a class="navbar-brand align-items" href="{{ url('/projects') }}">
+                        <img src="/images/teamWork.png" alt="TeamWork" style="height: 70px;">
+                            <!-- {{ config('app.name', 'TeamWork') }} -->
+                        </a>
+                    </h1>
+                    <!-- /Left Side Of Navbar -->
 
-
-                        <!-- /Left Side Of Navbar -->
-                    <div class="flex my-auto">
+                    <div class="flex">
                         <!-- Right Side Of Navbar -->
-                        <div class="flex text-muted no-underline">
+                        <div class="flex items-center text-muted ml-auto">
                             <!-- Authentication Links -->
                             @guest
                                 <a class="nav-link mr-2 text-accent no-underline" href="{{ route('login') }}">
@@ -53,33 +51,34 @@
 
                                 <theme-switcher></theme-switcher>
 
-                                <button
-                                   class="flex items-center text-default no-underline text-sm"
+                                <dropdown align="right" width="200px">
+                                    <template v-slot:trigger>
+                                        <button
+                                            class="flex items-center text-default no-underline text-sm border-none"
+                                            style="background:transparent;"
+                                        >
+                                            <img
+                                                src="{{ gravatar_url(Auth::user()->email) }}"
+                                                class="rounded-full h-16 mr-8"
+                                                alt="avatar"
+                                            >
 
-                                >
-                                    <img
-                                        src="{{ gravatar_url(Auth::user()->email) }}"
-                                         class="rounded-full h-16 mr-8"
-                                         alt="avatar"
-                                    >
+                                            {{ Auth::user()->name }}
 
-                                    {{ Auth::user()->name }}
+                                        </button>
+                                    </template>
 
-                                </button>
-
-                                <div class="dropdown-menu dropdown-menu-right"
-                                     aria-labelledby="navbarDropdown"
-                                >
-{{--                                    <a class="dropdown-item" href="{{ route('logout') }}"--}}
-{{--                                    onclick="event.preventDefault();--}}
-{{--                                                    document.getElementById('logout-form').submit();">--}}
-{{--                                        {{ __('Logout') }}--}}
-{{--                                    </a>--}}
-
-                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                    <form id="logout-form" action="{{ route('logout') }}" method="POST">
                                         @csrf
+                                        <button type="submit" class="dropdown-menu-link w-full
+                                        text-left border-none" style="background:transparent;">Logout</button>
                                     </form>
-                                </div>
+
+                                </dropdown>
+{{--                                <a href="#" class="dropdown-menu-link" onclick="javascript: document.querySelector--}}
+{{--                                ('#logout-form').submit()"></a>--}}
+
+
                             @endguest
                         </div>
                     </div>
@@ -87,11 +86,11 @@
             </div>
         </nav>
 
-        <?php env('SESSION_DRIVER'); ?>
-
-        <main class="container mx-auto py-4 sm:w-full">
-            @yield('content')
-        </main>
+        <div class="section">
+            <main class="container mx-auto py-4 sm:w-full">
+                @yield('content')
+            </main>
+        </div>
     </div>
 </body>
 </html>
